@@ -10,8 +10,8 @@ ORDER BY PropertyName
 
 --b.	Display the current home value for each property in question a). 
 SELECT DISTINCT
+[Property].[Id] AS PropertyID,
 [OwnerProperty].[OwnerId],
-[Property].[Id],
 [PropertyHomeValue].[IsActive],
 [Property].[Name] AS PropertyName,
 [PropertyHomeValue].[Value] AS PropertyCurrentValue
@@ -21,4 +21,10 @@ ON [PropertyHomeValue].[PropertyId] = [Property].[Id]
 JOIN [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[OwnerProperty]
 ON [OwnerProperty].[OwnerId]  = 1426 
 WHERE [PropertyHomeValue].[IsActive] = '1'
-ORDER BY [Property].[Id]
+ORDER BY PropertyID
+
+
+-- d.	Display all the jobs available
+SELECT DISTINCT
+[JobDescription] AS JobsAvailable
+FROM [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[Job]
