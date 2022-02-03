@@ -4,8 +4,9 @@ SELECT DISTINCT
 [Property].[Id],
 [Property].[Name] AS PropertyName
 FROM [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[Property]
-JOIN [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[OwnerProperty]
-ON [OwnerProperty].[OwnerId]  = 1426
+INNER JOIN [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[OwnerProperty]
+ON [OwnerProperty].[PropertyId]  = [Property].[Id]
+WHERE [OwnerProperty].[OwnerId]  = 1426
 ORDER BY PropertyName
 
 --b.	Display the current home value for each property in question a). 
@@ -19,12 +20,7 @@ FROM [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[Pro
 JOIN [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[PropertyHomeValue]
 ON [PropertyHomeValue].[PropertyId] = [Property].[Id] 
 JOIN [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[OwnerProperty]
-ON [OwnerProperty].[OwnerId]  = 1426 
-WHERE [PropertyHomeValue].[IsActive] = '1'
+ON [OwnerProperty].[PropertyId]  = [Property].[Id]
+WHERE [OwnerProperty].[OwnerId]  = 1426 and
+ [PropertyHomeValue].[IsActive] = '1'
 ORDER BY PropertyID
-
-
--- d.	Display all the jobs available
-SELECT DISTINCT
-[JobDescription] AS JobsAvailable
-FROM [MVPSTUDIO.CDVKL5VM8WEQ.AP-SOUTHEAST-2.RDS.AMAZONAWS.COM].[Keys].[dbo].[Job]
