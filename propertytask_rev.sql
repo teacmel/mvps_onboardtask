@@ -1,4 +1,4 @@
-﻿--a. Display a list of all property names and their property id’s for Owner Id: 1426. 
+--a. Display a list of all property names and their property id’s for Owner Id: 1426. 
 SELECT DISTINCT 
 op.[OwnerId],
 p.[Id],
@@ -24,8 +24,7 @@ ON op.[PropertyId]  = p.[Id]
 WHERE op.[OwnerId]  = 1426
 
 /*c.For each property in question a), return the following:                                                                      
-i.	Using rental payment amount, rental payment frequency, tenant start date and tenant end date to write 
-a query that returns the sum of all payments from start date to end date. 
+i.	Using rental payment amount, rental payment frequency, tenant start date and tenant end date to write a query that returns the sum of all payments from start date to end date. 
 */
 SELECT 
 p.[Id] as 'Property ID',
@@ -52,8 +51,7 @@ WHERE tp.[PropertyId] IN ('5597', '5637', '5638')
 ORDER BY p.[Id]
 
  /*c.For each property in question a), return the following:                                                                      
-ii.	Display the yield. 
-*/
+ii.	Display the yield. */
 WITH temptable
 as (
 SELECT tp.[PropertyId], 
@@ -104,5 +102,3 @@ INNER JOIN dbo.[TenantPaymentFrequencies] tpf
 on tp.[PaymentFrequencyId] = tpf.[Id] 
 INNER JOIN  dbo.[Property] prop
 on prop.[Id] = tp.[PropertyId] WHERE tp.PropertyId  in (SELECT p.[Id]  FROM dbo.[Property] p   INNER JOIN dbo.[OwnerProperty] op  ON p.[Id] = op.[PropertyId] where op.[OwnerId] ='1426')
-
-
