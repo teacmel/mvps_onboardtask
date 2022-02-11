@@ -1,11 +1,17 @@
 SELECT 
+op.[PropertyId],
 pro.[Name] as 'Property Name',
 ps.[FirstName],
-ad.[Number] as 'Property Address',
+CONCAT (ad.[Number],' ',ad.[Street],' ', ad.[Suburb])as 'Property Address',
 pro.[Bedroom],
 pro.[Bathroom],
 prenp.[Amount] as 'Rental payment',
-prenp.[FrequencyType] as 'Rental Repayment Frequency',
+prenp.[FrequencyType], 
+(CASE
+WHEN prenp.[FrequencyType] = '1' THEN ('Week')
+WHEN prenp.[FrequencyType] = '2' THEN ('Fornight')
+WHEN prenp.[FrequencyType] = '3' THEN ('Month')
+END) as 'Rental Repayment Frequency',
 pex.[Description] as 'Expense',
 pex.[Amount],
 pex.[Date]
