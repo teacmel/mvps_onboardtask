@@ -1,7 +1,7 @@
 SELECT 
 op.[PropertyId],
 pro.[Name] as 'Property Name',
-ps.[FirstName],
+CONCAT (ps.[FirstName],' ',ps.[LastName]) as 'FullName',
 CONCAT (ad.[Number],' ',ad.[Street],' ', ad.[Suburb])as 'Property Address',
 pro.[Bedroom],
 pro.[Bathroom],
@@ -27,4 +27,3 @@ ON ps.[Id] = op.[OwnerId]
 INNER JOIN dbo.[Address] ad
 ON  ad.[AddressId] = pro.[AddressId]
 WHERE pro.[Name] = 'Property A'
-
